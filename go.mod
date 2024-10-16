@@ -1,4 +1,4 @@
-module gitlab.com/ctf-service/protos
+module github.com/SgffCTF/proto
 
 go 1.22.2
 
