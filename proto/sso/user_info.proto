@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package user_info;
+
+option go_package = "ctf-service.sso.v1;ssov1";
+
+service UserInfo {
+    rpc UserInfo (UserInfoRequest) returns (UserInfoResponse);
+}
+
+message User {
+    int64 id = 1;
+    string username = 2;
+    string role = 3;
+}
+
+message UserInfoRequest {
+    string token = 1;
+}
+
+message UserInfoResponse {
+    User user = 1;
+}

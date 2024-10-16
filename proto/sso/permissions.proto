@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package permissions;
+
+option go_package = "ctf-service.sso.v1;ssov1";
+
+service DutyPermissions {
+    rpc CanRead (CanReadRequest) returns (CanReadResponse);
+    rpc CanCreate (CanCreateRequest) returns (CanCreateResponse);
+    rpc CanUpdate (CanUpdateRequest) returns (CanUpdateResponse);
+    rpc CanDelete (CanDeleteRequest) returns (CanDeleteResponse);
+}
+
+message CanReadRequest {
+    int64 duty_id = 1;
+    string token = 2;
+}
+
+message CanReadResponse {
+    bool success = 1;
+}
+
+message CanCreateRequest {
+    string token = 1;
+}
+
+message CanCreateResponse {
+    bool success = 1;
+}
+
+message CanUpdateRequest {
+    string token = 1;
+}
+
+message CanUpdateResponse {
+    bool success = 1;
+}
+
+message CanDeleteRequest {
+    int64 duty_id = 1;
+    string token = 2;
+}
+
+message CanDeleteResponse {
+    bool success = 1;
+}

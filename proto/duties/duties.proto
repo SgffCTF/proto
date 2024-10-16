@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package duties;
+
+option go_package = "ctf-service.duties.v1;dutiesv1";
+
+service Duties {
+    rpc ReadDuty(ReadDutyRequest) returns (ReadDutyResponse);
+    rpc ReadMyDuties(ReadMyDutiesRequest) returns (ReadMyDutiesResponse);
+    rpc CreateDuty(CreateDutyRequest) returns (CreateDutyResponse);
+    rpc UpdateDuty(UpdateDutyRequest) returns (UpdateDutyResponse);
+    rpc DeleteDuty(DeleteDutyRequest) returns (DeleteDutyResponse);
+}
+
+message Duty {
+    int64 id = 1;
+    string title = 2;
+    string description = 3;
+}
+
+message ReadDutyRequest {
+    int64 id = 1;
+}
+
+message ReadDutyResponse {
+    Duty duty = 1;
+}
+
+message ReadMyDutiesRequest {
+    string user_id = 1;
+    string role = 2;
+}
+
+message ReadMyDutiesResponse {
+    repeated Duty duties = 1;
+}
+
+message CreateDutyRequest {
+    string title = 1;
+    string description = 2;
+    int64 user_id = 3;
+}
+
+message CreateDutyResponse {
+
+}
+
+message UpdateDutyRequest {
+    Duty duty = 1;
+}
+
+message UpdateDutyResponse {
+    Duty duty = 1;
+}
+
+message DeleteDutyRequest {
+    int64 id = 1;
+}
+
+message DeleteDutyResponse {
+
+}
