@@ -29,7 +29,8 @@ message CanCreateResponse {
 }
 
 message CanUpdateRequest {
-    string token = 1;
+    int64 duty_id = 1;
+    string token = 2;
 }
 
 message CanUpdateResponse {
