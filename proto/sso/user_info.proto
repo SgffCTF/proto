@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package user_info;
 
-option go_package = "ctf-service.sso.v1;ssov1";
+option go_package = "ctf-service.duties.v1;dutiesv1";
 
 service UserInfo {
     rpc UserInfo (UserInfoRequest) returns (UserInfoResponse);

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package duties;
 
-option go_package = "ctf-service.duties.v1;dutiesv1";
+option go_package = "ctf-service.sso.v1;ssov1";
 
 service Duties {
     rpc ReadDuty(ReadDutyRequest) returns (ReadDutyResponse);
