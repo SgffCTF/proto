@@ -4,7 +4,7 @@
 // - protoc             v3.21.12
 // source: sso/permissions.proto
 
-package dutiesv1
+package ssov1
 
 import (
 	context "context"
