@@ -4,7 +4,7 @@
 // - protoc             v3.21.12
 // source: duties/duties.proto
 
-package ssov1
+package dutiesv1
 
 import (
 	context "context"
