@@ -177,7 +177,7 @@ func (x *ReadDutyResponse) GetDuty() *Duty {
 	return nil
 }
 
-type ReadMyDutiesRequest struct {
+type ReadMyOwnerDutiesRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -186,8 +186,8 @@ type ReadMyDutiesRequest struct {
 	Role   string `protobuf:"bytes,2,opt,name=role,proto3" json:"role,omitempty"`
 }
 
-func (x *ReadMyDutiesRequest) Reset() {
-	*x = ReadMyDutiesRequest{}
+func (x *ReadMyOwnerDutiesRequest) Reset() {
+	*x = ReadMyOwnerDutiesRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_duties_duties_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -195,13 +195,13 @@ func (x *ReadMyDutiesRequest) Reset() {
 	}
 }
 
-func (x *ReadMyDutiesRequest) String() string {
+func (x *ReadMyOwnerDutiesRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ReadMyDutiesRequest) ProtoMessage() {}
+func (*ReadMyOwnerDutiesRequest) ProtoMessage() {}
 
-func (x *ReadMyDutiesRequest) ProtoReflect() protoreflect.Message {
+func (x *ReadMyOwnerDutiesRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_duties_duties_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -213,19 +213,74 @@ func (x *ReadMyDutiesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReadMyDutiesRequest.ProtoReflect.Descriptor instead.
-func (*ReadMyDutiesRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ReadMyOwnerDutiesRequest.ProtoReflect.Descriptor instead.
+func (*ReadMyOwnerDutiesRequest) Descriptor() ([]byte, []int) {
 	return file_duties_duties_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *ReadMyDutiesRequest) GetUserId() string {
+func (x *ReadMyOwnerDutiesRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
 	return ""
 }
 
-func (x *ReadMyDutiesRequest) GetRole() string {
+func (x *ReadMyOwnerDutiesRequest) GetRole() string {
+	if x != nil {
+		return x.Role
+	}
+	return ""
+}
+
+type ReadMyTargetDutiesRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UserId string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Role   string `protobuf:"bytes,2,opt,name=role,proto3" json:"role,omitempty"`
+}
+
+func (x *ReadMyTargetDutiesRequest) Reset() {
+	*x = ReadMyTargetDutiesRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_duties_duties_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ReadMyTargetDutiesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReadMyTargetDutiesRequest) ProtoMessage() {}
+
+func (x *ReadMyTargetDutiesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_duties_duties_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReadMyTargetDutiesRequest.ProtoReflect.Descriptor instead.
+func (*ReadMyTargetDutiesRequest) Descriptor() ([]byte, []int) {
+	return file_duties_duties_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ReadMyTargetDutiesRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *ReadMyTargetDutiesRequest) GetRole() string {
 	if x != nil {
 		return x.Role
 	}
@@ -243,7 +298,7 @@ type ReadMyDutiesResponse struct {
 func (x *ReadMyDutiesResponse) Reset() {
 	*x = ReadMyDutiesResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_duties_duties_proto_msgTypes[4]
+		mi := &file_duties_duties_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -256,7 +311,7 @@ func (x *ReadMyDutiesResponse) String() string {
 func (*ReadMyDutiesResponse) ProtoMessage() {}
 
 func (x *ReadMyDutiesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_duties_duties_proto_msgTypes[4]
+	mi := &file_duties_duties_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -269,7 +324,7 @@ func (x *ReadMyDutiesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadMyDutiesResponse.ProtoReflect.Descriptor instead.
 func (*ReadMyDutiesResponse) Descriptor() ([]byte, []int) {
-	return file_duties_duties_proto_rawDescGZIP(), []int{4}
+	return file_duties_duties_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ReadMyDutiesResponse) GetDuties() []*Duty {
@@ -286,13 +341,14 @@ type CreateDutyRequest struct {
 
 	Title       string `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
 	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	UserId      int64  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OwnerId     int64  `protobuf:"varint,3,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
+	TargetId    int64  `protobuf:"varint,4,opt,name=target_id,json=targetId,proto3" json:"target_id,omitempty"`
 }
 
 func (x *CreateDutyRequest) Reset() {
 	*x = CreateDutyRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_duties_duties_proto_msgTypes[5]
+		mi := &file_duties_duties_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -305,7 +361,7 @@ func (x *CreateDutyRequest) String() string {
 func (*CreateDutyRequest) ProtoMessage() {}
 
 func (x *CreateDutyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_duties_duties_proto_msgTypes[5]
+	mi := &file_duties_duties_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -318,7 +374,7 @@ func (x *CreateDutyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateDutyRequest.ProtoReflect.Descriptor instead.
 func (*CreateDutyRequest) Descriptor() ([]byte, []int) {
-	return file_duties_duties_proto_rawDescGZIP(), []int{5}
+	return file_duties_duties_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CreateDutyRequest) GetTitle() string {
@@ -335,9 +391,16 @@ func (x *CreateDutyRequest) GetDescription() string {
 	return ""
 }
 
-func (x *CreateDutyRequest) GetUserId() int64 {
+func (x *CreateDutyRequest) GetOwnerId() int64 {
 	if x != nil {
-		return x.UserId
+		return x.OwnerId
+	}
+	return 0
+}
+
+func (x *CreateDutyRequest) GetTargetId() int64 {
+	if x != nil {
+		return x.TargetId
 	}
 	return 0
 }
@@ -351,7 +414,7 @@ type CreateDutyResponse struct {
 func (x *CreateDutyResponse) Reset() {
 	*x = CreateDutyResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_duties_duties_proto_msgTypes[6]
+		mi := &file_duties_duties_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -364,7 +427,7 @@ func (x *CreateDutyResponse) String() string {
 func (*CreateDutyResponse) ProtoMessage() {}
 
 func (x *CreateDutyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_duties_duties_proto_msgTypes[6]
+	mi := &file_duties_duties_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -377,7 +440,7 @@ func (x *CreateDutyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateDutyResponse.ProtoReflect.Descriptor instead.
 func (*CreateDutyResponse) Descriptor() ([]byte, []int) {
-	return file_duties_duties_proto_rawDescGZIP(), []int{6}
+	return file_duties_duties_proto_rawDescGZIP(), []int{7}
 }
 
 type UpdateDutyRequest struct {
@@ -391,7 +454,7 @@ type UpdateDutyRequest struct {
 func (x *UpdateDutyRequest) Reset() {
 	*x = UpdateDutyRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_duties_duties_proto_msgTypes[7]
+		mi := &file_duties_duties_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -404,7 +467,7 @@ func (x *UpdateDutyRequest) String() string {
 func (*UpdateDutyRequest) ProtoMessage() {}
 
 func (x *UpdateDutyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_duties_duties_proto_msgTypes[7]
+	mi := &file_duties_duties_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -417,7 +480,7 @@ func (x *UpdateDutyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateDutyRequest.ProtoReflect.Descriptor instead.
 func (*UpdateDutyRequest) Descriptor() ([]byte, []int) {
-	return file_duties_duties_proto_rawDescGZIP(), []int{7}
+	return file_duties_duties_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UpdateDutyRequest) GetDuty() *Duty {
@@ -438,7 +501,7 @@ type UpdateDutyResponse struct {
 func (x *UpdateDutyResponse) Reset() {
 	*x = UpdateDutyResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_duties_duties_proto_msgTypes[8]
+		mi := &file_duties_duties_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -451,7 +514,7 @@ func (x *UpdateDutyResponse) String() string {
 func (*UpdateDutyResponse) ProtoMessage() {}
 
 func (x *UpdateDutyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_duties_duties_proto_msgTypes[8]
+	mi := &file_duties_duties_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -464,7 +527,7 @@ func (x *UpdateDutyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateDutyResponse.ProtoReflect.Descriptor instead.
 func (*UpdateDutyResponse) Descriptor() ([]byte, []int) {
-	return file_duties_duties_proto_rawDescGZIP(), []int{8}
+	return file_duties_duties_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *UpdateDutyResponse) GetDuty() *Duty {
@@ -485,7 +548,7 @@ type DeleteDutyRequest struct {
 func (x *DeleteDutyRequest) Reset() {
 	*x = DeleteDutyRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_duties_duties_proto_msgTypes[9]
+		mi := &file_duties_duties_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -498,7 +561,7 @@ func (x *DeleteDutyRequest) String() string {
 func (*DeleteDutyRequest) ProtoMessage() {}
 
 func (x *DeleteDutyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_duties_duties_proto_msgTypes[9]
+	mi := &file_duties_duties_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -511,7 +574,7 @@ func (x *DeleteDutyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteDutyRequest.ProtoReflect.Descriptor instead.
 func (*DeleteDutyRequest) Descriptor() ([]byte, []int) {
-	return file_duties_duties_proto_rawDescGZIP(), []int{9}
+	return file_duties_duties_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *DeleteDutyRequest) GetId() int64 {
@@ -530,7 +593,7 @@ type DeleteDutyResponse struct {
 func (x *DeleteDutyResponse) Reset() {
 	*x = DeleteDutyResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_duties_duties_proto_msgTypes[10]
+		mi := &file_duties_duties_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -543,7 +606,7 @@ func (x *DeleteDutyResponse) String() string {
 func (*DeleteDutyResponse) ProtoMessage() {}
 
 func (x *DeleteDutyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_duties_duties_proto_msgTypes[10]
+	mi := &file_duties_duties_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -556,7 +619,7 @@ func (x *DeleteDutyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteDutyResponse.ProtoReflect.Descriptor instead.
 func (*DeleteDutyResponse) Descriptor() ([]byte, []int) {
-	return file_duties_duties_proto_rawDescGZIP(), []int{10}
+	return file_duties_duties_proto_rawDescGZIP(), []int{11}
 }
 
 var File_duties_duties_proto protoreflect.FileDescriptor
@@ -574,40 +637,53 @@ var file_duties_duties_proto_rawDesc = []byte{
 	0x22, 0x34, 0x0a, 0x10, 0x52, 0x65, 0x61, 0x64, 0x44, 0x75, 0x74, 0x79, 0x52, 0x65, 0x73, 0x70,
 	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x20, 0x0a, 0x04, 0x64, 0x75, 0x74, 0x79, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x64, 0x75, 0x74, 0x69, 0x65, 0x73, 0x2e, 0x44, 0x75, 0x74, 0x79,
-	0x52, 0x04, 0x64, 0x75, 0x74, 0x79, 0x22, 0x42, 0x0a, 0x13, 0x52, 0x65, 0x61, 0x64, 0x4d, 0x79,
-	0x44, 0x75, 0x74, 0x69, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x17, 0x0a,
-	0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
-	0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x22, 0x3c, 0x0a, 0x14, 0x52, 0x65,
-	0x61, 0x64, 0x4d, 0x79, 0x44, 0x75, 0x74, 0x69, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x12, 0x24, 0x0a, 0x06, 0x64, 0x75, 0x74, 0x69, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03,
-	0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x64, 0x75, 0x74, 0x69, 0x65, 0x73, 0x2e, 0x44, 0x75, 0x74, 0x79,
-	0x52, 0x06, 0x64, 0x75, 0x74, 0x69, 0x65, 0x73, 0x22, 0x64, 0x0a, 0x11, 0x43, 0x72, 0x65, 0x61,
+	0x52, 0x04, 0x64, 0x75, 0x74, 0x79, 0x22, 0x47, 0x0a, 0x18, 0x52, 0x65, 0x61, 0x64, 0x4d, 0x79,
+	0x4f, 0x77, 0x6e, 0x65, 0x72, 0x44, 0x75, 0x74, 0x69, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x17, 0x0a, 0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x72,
+	0x6f, 0x6c, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x22,
+	0x48, 0x0a, 0x19, 0x52, 0x65, 0x61, 0x64, 0x4d, 0x79, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x44,
+	0x75, 0x74, 0x69, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x17, 0x0a, 0x07,
+	0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x75,
+	0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x04, 0x72, 0x6f, 0x6c, 0x65, 0x22, 0x3c, 0x0a, 0x14, 0x52, 0x65, 0x61,
+	0x64, 0x4d, 0x79, 0x44, 0x75, 0x74, 0x69, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x24, 0x0a, 0x06, 0x64, 0x75, 0x74, 0x69, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x0c, 0x2e, 0x64, 0x75, 0x74, 0x69, 0x65, 0x73, 0x2e, 0x44, 0x75, 0x74, 0x79, 0x52,
+	0x06, 0x64, 0x75, 0x74, 0x69, 0x65, 0x73, 0x22, 0x83, 0x01, 0x0a, 0x11, 0x43, 0x72, 0x65, 0x61,
 	0x74, 0x65, 0x44, 0x75, 0x74, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a,
 	0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69,
 	0x74, 0x6c, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69,
 	0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69,
-	0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x17, 0x0a, 0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x22, 0x14,
-	0x0a, 0x12, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x44, 0x75, 0x74, 0x79, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x35, 0x0a, 0x11, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x44, 0x75,
-	0x74, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x20, 0x0a, 0x04, 0x64, 0x75, 0x74,
-	0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x64, 0x75, 0x74, 0x69, 0x65, 0x73,
-	0x2e, 0x44, 0x75, 0x74, 0x79, 0x52, 0x04, 0x64, 0x75, 0x74, 0x79, 0x22, 0x36, 0x0a, 0x12, 0x55,
-	0x70, 0x64, 0x61, 0x74, 0x65, 0x44, 0x75, 0x74, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x12, 0x20, 0x0a, 0x04, 0x64, 0x75, 0x74, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x0c, 0x2e, 0x64, 0x75, 0x74, 0x69, 0x65, 0x73, 0x2e, 0x44, 0x75, 0x74, 0x79, 0x52, 0x04, 0x64,
-	0x75, 0x74, 0x79, 0x22, 0x23, 0x0a, 0x11, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x44, 0x75, 0x74,
-	0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x22, 0x14, 0x0a, 0x12, 0x44, 0x65, 0x6c, 0x65,
-	0x74, 0x65, 0x44, 0x75, 0x74, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0xe1,
-	0x02, 0x0a, 0x06, 0x44, 0x75, 0x74, 0x69, 0x65, 0x73, 0x12, 0x3d, 0x0a, 0x08, 0x52, 0x65, 0x61,
-	0x64, 0x44, 0x75, 0x74, 0x79, 0x12, 0x17, 0x2e, 0x64, 0x75, 0x74, 0x69, 0x65, 0x73, 0x2e, 0x52,
-	0x65, 0x61, 0x64, 0x44, 0x75, 0x74, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x18,
-	0x2e, 0x64, 0x75, 0x74, 0x69, 0x65, 0x73, 0x2e, 0x52, 0x65, 0x61, 0x64, 0x44, 0x75, 0x74, 0x79,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x49, 0x0a, 0x0c, 0x52, 0x65, 0x61, 0x64,
-	0x4d, 0x79, 0x44, 0x75, 0x74, 0x69, 0x65, 0x73, 0x12, 0x1b, 0x2e, 0x64, 0x75, 0x74, 0x69, 0x65,
-	0x73, 0x2e, 0x52, 0x65, 0x61, 0x64, 0x4d, 0x79, 0x44, 0x75, 0x74, 0x69, 0x65, 0x73, 0x52, 0x65,
+	0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x19, 0x0a, 0x08, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x5f, 0x69,
+	0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x49, 0x64,
+	0x12, 0x1b, 0x0a, 0x09, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x08, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x49, 0x64, 0x22, 0x14, 0x0a,
+	0x12, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x44, 0x75, 0x74, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x22, 0x35, 0x0a, 0x11, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x44, 0x75, 0x74,
+	0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x20, 0x0a, 0x04, 0x64, 0x75, 0x74, 0x79,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x64, 0x75, 0x74, 0x69, 0x65, 0x73, 0x2e,
+	0x44, 0x75, 0x74, 0x79, 0x52, 0x04, 0x64, 0x75, 0x74, 0x79, 0x22, 0x36, 0x0a, 0x12, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x44, 0x75, 0x74, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x20, 0x0a, 0x04, 0x64, 0x75, 0x74, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c,
+	0x2e, 0x64, 0x75, 0x74, 0x69, 0x65, 0x73, 0x2e, 0x44, 0x75, 0x74, 0x79, 0x52, 0x04, 0x64, 0x75,
+	0x74, 0x79, 0x22, 0x23, 0x0a, 0x11, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x44, 0x75, 0x74, 0x79,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x22, 0x14, 0x0a, 0x12, 0x44, 0x65, 0x6c, 0x65, 0x74,
+	0x65, 0x44, 0x75, 0x74, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0xc2, 0x03,
+	0x0a, 0x06, 0x44, 0x75, 0x74, 0x69, 0x65, 0x73, 0x12, 0x3d, 0x0a, 0x08, 0x52, 0x65, 0x61, 0x64,
+	0x44, 0x75, 0x74, 0x79, 0x12, 0x17, 0x2e, 0x64, 0x75, 0x74, 0x69, 0x65, 0x73, 0x2e, 0x52, 0x65,
+	0x61, 0x64, 0x44, 0x75, 0x74, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x18, 0x2e,
+	0x64, 0x75, 0x74, 0x69, 0x65, 0x73, 0x2e, 0x52, 0x65, 0x61, 0x64, 0x44, 0x75, 0x74, 0x79, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x53, 0x0a, 0x11, 0x52, 0x65, 0x61, 0x64, 0x4d,
+	0x79, 0x4f, 0x77, 0x6e, 0x65, 0x72, 0x44, 0x75, 0x74, 0x69, 0x65, 0x73, 0x12, 0x20, 0x2e, 0x64,
+	0x75, 0x74, 0x69, 0x65, 0x73, 0x2e, 0x52, 0x65, 0x61, 0x64, 0x4d, 0x79, 0x4f, 0x77, 0x6e, 0x65,
+	0x72, 0x44, 0x75, 0x74, 0x69, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1c,
+	0x2e, 0x64, 0x75, 0x74, 0x69, 0x65, 0x73, 0x2e, 0x52, 0x65, 0x61, 0x64, 0x4d, 0x79, 0x44, 0x75,
+	0x74, 0x69, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x55, 0x0a, 0x12,
+	0x52, 0x65, 0x61, 0x64, 0x4d, 0x79, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x44, 0x75, 0x74, 0x69,
+	0x65, 0x73, 0x12, 0x21, 0x2e, 0x64, 0x75, 0x74, 0x69, 0x65, 0x73, 0x2e, 0x52, 0x65, 0x61, 0x64,
+	0x4d, 0x79, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x44, 0x75, 0x74, 0x69, 0x65, 0x73, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1c, 0x2e, 0x64, 0x75, 0x74, 0x69, 0x65, 0x73, 0x2e, 0x52,
 	0x65, 0x61, 0x64, 0x4d, 0x79, 0x44, 0x75, 0x74, 0x69, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f,
 	0x6e, 0x73, 0x65, 0x12, 0x43, 0x0a, 0x0a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x44, 0x75, 0x74,
@@ -640,19 +716,20 @@ func file_duties_duties_proto_rawDescGZIP() []byte {
 	return file_duties_duties_proto_rawDescData
 }
 
-var file_duties_duties_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_duties_duties_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_duties_duties_proto_goTypes = []any{
-	(*Duty)(nil),                 // 0: duties.Duty
-	(*ReadDutyRequest)(nil),      // 1: duties.ReadDutyRequest
-	(*ReadDutyResponse)(nil),     // 2: duties.ReadDutyResponse
-	(*ReadMyDutiesRequest)(nil),  // 3: duties.ReadMyDutiesRequest
-	(*ReadMyDutiesResponse)(nil), // 4: duties.ReadMyDutiesResponse
-	(*CreateDutyRequest)(nil),    // 5: duties.CreateDutyRequest
-	(*CreateDutyResponse)(nil),   // 6: duties.CreateDutyResponse
-	(*UpdateDutyRequest)(nil),    // 7: duties.UpdateDutyRequest
-	(*UpdateDutyResponse)(nil),   // 8: duties.UpdateDutyResponse
-	(*DeleteDutyRequest)(nil),    // 9: duties.DeleteDutyRequest
-	(*DeleteDutyResponse)(nil),   // 10: duties.DeleteDutyResponse
+	(*Duty)(nil),                      // 0: duties.Duty
+	(*ReadDutyRequest)(nil),           // 1: duties.ReadDutyRequest
+	(*ReadDutyResponse)(nil),          // 2: duties.ReadDutyResponse
+	(*ReadMyOwnerDutiesRequest)(nil),  // 3: duties.ReadMyOwnerDutiesRequest
+	(*ReadMyTargetDutiesRequest)(nil), // 4: duties.ReadMyTargetDutiesRequest
+	(*ReadMyDutiesResponse)(nil),      // 5: duties.ReadMyDutiesResponse
+	(*CreateDutyRequest)(nil),         // 6: duties.CreateDutyRequest
+	(*CreateDutyResponse)(nil),        // 7: duties.CreateDutyResponse
+	(*UpdateDutyRequest)(nil),         // 8: duties.UpdateDutyRequest
+	(*UpdateDutyResponse)(nil),        // 9: duties.UpdateDutyResponse
+	(*DeleteDutyRequest)(nil),         // 10: duties.DeleteDutyRequest
+	(*DeleteDutyResponse)(nil),        // 11: duties.DeleteDutyResponse
 }
 var file_duties_duties_proto_depIdxs = []int32{
 	0,  // 0: duties.ReadDutyResponse.duty:type_name -> duties.Duty
@@ -660,17 +737,19 @@ var file_duties_duties_proto_depIdxs = []int32{
 	0,  // 2: duties.UpdateDutyRequest.duty:type_name -> duties.Duty
 	0,  // 3: duties.UpdateDutyResponse.duty:type_name -> duties.Duty
 	1,  // 4: duties.Duties.ReadDuty:input_type -> duties.ReadDutyRequest
-	3,  // 5: duties.Duties.ReadMyDuties:input_type -> duties.ReadMyDutiesRequest
-	5,  // 6: duties.Duties.CreateDuty:input_type -> duties.CreateDutyRequest
-	7,  // 7: duties.Duties.UpdateDuty:input_type -> duties.UpdateDutyRequest
-	9,  // 8: duties.Duties.DeleteDuty:input_type -> duties.DeleteDutyRequest
-	2,  // 9: duties.Duties.ReadDuty:output_type -> duties.ReadDutyResponse
-	4,  // 10: duties.Duties.ReadMyDuties:output_type -> duties.ReadMyDutiesResponse
-	6,  // 11: duties.Duties.CreateDuty:output_type -> duties.CreateDutyResponse
-	8,  // 12: duties.Duties.UpdateDuty:output_type -> duties.UpdateDutyResponse
-	10, // 13: duties.Duties.DeleteDuty:output_type -> duties.DeleteDutyResponse
-	9,  // [9:14] is the sub-list for method output_type
-	4,  // [4:9] is the sub-list for method input_type
+	3,  // 5: duties.Duties.ReadMyOwnerDuties:input_type -> duties.ReadMyOwnerDutiesRequest
+	4,  // 6: duties.Duties.ReadMyTargetDuties:input_type -> duties.ReadMyTargetDutiesRequest
+	6,  // 7: duties.Duties.CreateDuty:input_type -> duties.CreateDutyRequest
+	8,  // 8: duties.Duties.UpdateDuty:input_type -> duties.UpdateDutyRequest
+	10, // 9: duties.Duties.DeleteDuty:input_type -> duties.DeleteDutyRequest
+	2,  // 10: duties.Duties.ReadDuty:output_type -> duties.ReadDutyResponse
+	5,  // 11: duties.Duties.ReadMyOwnerDuties:output_type -> duties.ReadMyDutiesResponse
+	5,  // 12: duties.Duties.ReadMyTargetDuties:output_type -> duties.ReadMyDutiesResponse
+	7,  // 13: duties.Duties.CreateDuty:output_type -> duties.CreateDutyResponse
+	9,  // 14: duties.Duties.UpdateDuty:output_type -> duties.UpdateDutyResponse
+	11, // 15: duties.Duties.DeleteDuty:output_type -> duties.DeleteDutyResponse
+	10, // [10:16] is the sub-list for method output_type
+	4,  // [4:10] is the sub-list for method input_type
 	4,  // [4:4] is the sub-list for extension type_name
 	4,  // [4:4] is the sub-list for extension extendee
 	0,  // [0:4] is the sub-list for field type_name
@@ -719,7 +798,7 @@ func file_duties_duties_proto_init() {
 			}
 		}
 		file_duties_duties_proto_msgTypes[3].Exporter = func(v any, i int) any {
-			switch v := v.(*ReadMyDutiesRequest); i {
+			switch v := v.(*ReadMyOwnerDutiesRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -731,7 +810,7 @@ func file_duties_duties_proto_init() {
 			}
 		}
 		file_duties_duties_proto_msgTypes[4].Exporter = func(v any, i int) any {
-			switch v := v.(*ReadMyDutiesResponse); i {
+			switch v := v.(*ReadMyTargetDutiesRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -743,7 +822,7 @@ func file_duties_duties_proto_init() {
 			}
 		}
 		file_duties_duties_proto_msgTypes[5].Exporter = func(v any, i int) any {
-			switch v := v.(*CreateDutyRequest); i {
+			switch v := v.(*ReadMyDutiesResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -755,7 +834,7 @@ func file_duties_duties_proto_init() {
 			}
 		}
 		file_duties_duties_proto_msgTypes[6].Exporter = func(v any, i int) any {
-			switch v := v.(*CreateDutyResponse); i {
+			switch v := v.(*CreateDutyRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -767,7 +846,7 @@ func file_duties_duties_proto_init() {
 			}
 		}
 		file_duties_duties_proto_msgTypes[7].Exporter = func(v any, i int) any {
-			switch v := v.(*UpdateDutyRequest); i {
+			switch v := v.(*CreateDutyResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -779,7 +858,7 @@ func file_duties_duties_proto_init() {
 			}
 		}
 		file_duties_duties_proto_msgTypes[8].Exporter = func(v any, i int) any {
-			switch v := v.(*UpdateDutyResponse); i {
+			switch v := v.(*UpdateDutyRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -791,7 +870,7 @@ func file_duties_duties_proto_init() {
 			}
 		}
 		file_duties_duties_proto_msgTypes[9].Exporter = func(v any, i int) any {
-			switch v := v.(*DeleteDutyRequest); i {
+			switch v := v.(*UpdateDutyResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -803,6 +882,18 @@ func file_duties_duties_proto_init() {
 			}
 		}
 		file_duties_duties_proto_msgTypes[10].Exporter = func(v any, i int) any {
+			switch v := v.(*DeleteDutyRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_duties_duties_proto_msgTypes[11].Exporter = func(v any, i int) any {
 			switch v := v.(*DeleteDutyResponse); i {
 			case 0:
 				return &v.state
@@ -821,7 +912,7 @@ func file_duties_duties_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_duties_duties_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
