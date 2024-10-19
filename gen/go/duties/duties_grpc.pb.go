@@ -32,8 +32,8 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DutiesClient interface {
 	ReadDuty(ctx context.Context, in *ReadDutyRequest, opts ...grpc.CallOption) (*ReadDutyResponse, error)
-	ReadMyOwnerDuties(ctx context.Context, in *ReadMyOwnerDutiesRequest, opts ...grpc.CallOption) (*ReadMyDutiesResponse, error)
-	ReadMyTargetDuties(ctx context.Context, in *ReadMyTargetDutiesRequest, opts ...grpc.CallOption) (*ReadMyDutiesResponse, error)
+	ReadMyOwnerDuties(ctx context.Context, in *ReadOwnerDutiesRequest, opts ...grpc.CallOption) (*ReadDutiesResponse, error)
+	ReadMyTargetDuties(ctx context.Context, in *ReadTargetDutiesRequest, opts ...grpc.CallOption) (*ReadDutiesResponse, error)
 	CreateDuty(ctx context.Context, in *CreateDutyRequest, opts ...grpc.CallOption) (*CreateDutyResponse, error)
 	UpdateDuty(ctx context.Context, in *UpdateDutyRequest, opts ...grpc.CallOption) (*UpdateDutyResponse, error)
 	DeleteDuty(ctx context.Context, in *DeleteDutyRequest, opts ...grpc.CallOption) (*DeleteDutyResponse, error)
@@ -57,9 +57,9 @@ func (c *dutiesClient) ReadDuty(ctx context.Context, in *ReadDutyRequest, opts .
 	return out, nil
 }
 
-func (c *dutiesClient) ReadMyOwnerDuties(ctx context.Context, in *ReadMyOwnerDutiesRequest, opts ...grpc.CallOption) (*ReadMyDutiesResponse, error) {
+func (c *dutiesClient) ReadMyOwnerDuties(ctx context.Context, in *ReadOwnerDutiesRequest, opts ...grpc.CallOption) (*ReadDutiesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ReadMyDutiesResponse)
+	out := new(ReadDutiesResponse)
 	err := c.cc.Invoke(ctx, Duties_ReadMyOwnerDuties_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -67,9 +67,9 @@ func (c *dutiesClient) ReadMyOwnerDuties(ctx context.Context, in *ReadMyOwnerDut
 	return out, nil
 }
 
-func (c *dutiesClient) ReadMyTargetDuties(ctx context.Context, in *ReadMyTargetDutiesRequest, opts ...grpc.CallOption) (*ReadMyDutiesResponse, error) {
+func (c *dutiesClient) ReadMyTargetDuties(ctx context.Context, in *ReadTargetDutiesRequest, opts ...grpc.CallOption) (*ReadDutiesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ReadMyDutiesResponse)
+	out := new(ReadDutiesResponse)
 	err := c.cc.Invoke(ctx, Duties_ReadMyTargetDuties_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -112,8 +112,8 @@ func (c *dutiesClient) DeleteDuty(ctx context.Context, in *DeleteDutyRequest, op
 // for forward compatibility.
 type DutiesServer interface {
 	ReadDuty(context.Context, *ReadDutyRequest) (*ReadDutyResponse, error)
-	ReadMyOwnerDuties(context.Context, *ReadMyOwnerDutiesRequest) (*ReadMyDutiesResponse, error)
-	ReadMyTargetDuties(context.Context, *ReadMyTargetDutiesRequest) (*ReadMyDutiesResponse, error)
+	ReadMyOwnerDuties(context.Context, *ReadOwnerDutiesRequest) (*ReadDutiesResponse, error)
+	ReadMyTargetDuties(context.Context, *ReadTargetDutiesRequest) (*ReadDutiesResponse, error)
 	CreateDuty(context.Context, *CreateDutyRequest) (*CreateDutyResponse, error)
 	UpdateDuty(context.Context, *UpdateDutyRequest) (*UpdateDutyResponse, error)
 	DeleteDuty(context.Context, *DeleteDutyRequest) (*DeleteDutyResponse, error)
@@ -130,10 +130,10 @@ type UnimplementedDutiesServer struct{}
 func (UnimplementedDutiesServer) ReadDuty(context.Context, *ReadDutyRequest) (*ReadDutyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReadDuty not implemented")
 }
-func (UnimplementedDutiesServer) ReadMyOwnerDuties(context.Context, *ReadMyOwnerDutiesRequest) (*ReadMyDutiesResponse, error) {
+func (UnimplementedDutiesServer) ReadMyOwnerDuties(context.Context, *ReadOwnerDutiesRequest) (*ReadDutiesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReadMyOwnerDuties not implemented")
 }
-func (UnimplementedDutiesServer) ReadMyTargetDuties(context.Context, *ReadMyTargetDutiesRequest) (*ReadMyDutiesResponse, error) {
+func (UnimplementedDutiesServer) ReadMyTargetDuties(context.Context, *ReadTargetDutiesRequest) (*ReadDutiesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReadMyTargetDuties not implemented")
 }
 func (UnimplementedDutiesServer) CreateDuty(context.Context, *CreateDutyRequest) (*CreateDutyResponse, error) {
@@ -185,7 +185,7 @@ func _Duties_ReadDuty_Handler(srv interface{}, ctx context.Context, dec func(int
 }
 
 func _Duties_ReadMyOwnerDuties_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReadMyOwnerDutiesRequest)
+	in := new(ReadOwnerDutiesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -197,13 +197,13 @@ func _Duties_ReadMyOwnerDuties_Handler(srv interface{}, ctx context.Context, dec
 		FullMethod: Duties_ReadMyOwnerDuties_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DutiesServer).ReadMyOwnerDuties(ctx, req.(*ReadMyOwnerDutiesRequest))
+		return srv.(DutiesServer).ReadMyOwnerDuties(ctx, req.(*ReadOwnerDutiesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Duties_ReadMyTargetDuties_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReadMyTargetDutiesRequest)
+	in := new(ReadTargetDutiesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -215,7 +215,7 @@ func _Duties_ReadMyTargetDuties_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: Duties_ReadMyTargetDuties_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DutiesServer).ReadMyTargetDuties(ctx, req.(*ReadMyTargetDutiesRequest))
+		return srv.(DutiesServer).ReadMyTargetDuties(ctx, req.(*ReadTargetDutiesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
