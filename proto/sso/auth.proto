@@ -17,6 +17,7 @@ message RegisterRequest {
 }
 
 message RegisterResponse {
+    int64 id = 1;
 }
 
 message LoginRequest {
