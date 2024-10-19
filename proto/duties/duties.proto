@@ -32,7 +32,7 @@ message ReadOwnerDutiesRequest {
 }
 
 message ReadTargetDutiesRequest {
-    int64 owner_id = 1;
+    int64 target_id = 1;
 }
 
 message ReadDutiesResponse {
