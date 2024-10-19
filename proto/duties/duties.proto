@@ -6,8 +6,8 @@ option go_package = "ctf-service.duties.v1;dutiesv1";
 
 service Duties {
     rpc ReadDuty(ReadDutyRequest) returns (ReadDutyResponse);
-    rpc ReadMyOwnerDuties(ReadOwnerDutiesRequest) returns (ReadDutiesResponse);
-    rpc ReadMyTargetDuties(ReadTargetDutiesRequest) returns (ReadDutiesResponse);
+    rpc ReadOwnerDuties(ReadOwnerDutiesRequest) returns (ReadDutiesResponse);
+    rpc ReadTargetDuties(ReadTargetDutiesRequest) returns (ReadDutiesResponse);
     rpc CreateDuty(CreateDutyRequest) returns (CreateDutyResponse);
     rpc UpdateDuty(UpdateDutyRequest) returns (UpdateDutyResponse);
     rpc DeleteDuty(DeleteDutyRequest) returns (DeleteDutyResponse);
