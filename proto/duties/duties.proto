@@ -47,7 +47,7 @@ message CreateDutyRequest {
 }
 
 message CreateDutyResponse {
-
+    int64 id = 1;
 }
 
 message UpdateDutyRequest {
