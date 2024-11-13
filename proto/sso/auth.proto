@@ -36,3 +36,11 @@ message RoleRequest {
 message RoleResponse {
     string role = 1;
 }
+
+message VerifyTokenRequest {
+    string token = 1;
+}
+
+message VerifyTokenResponse {
+    bool valid = 1;
+}
