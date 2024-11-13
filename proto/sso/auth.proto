@@ -8,6 +8,7 @@ service Auth {
     rpc Register (RegisterRequest) returns (RegisterResponse);
     rpc Login (LoginRequest) returns (LoginResponse);
     rpc Role (RoleRequest) returns (RoleResponse);
+    rpc VerifyToken (VerifyTokenRequest) returns (VerifyTokenResponse);
 }
 
 message RegisterRequest {
