@@ -7,8 +7,6 @@ option go_package = "ctf-service.sso.v1;ssov1";
 service Auth {
     rpc Register (RegisterRequest) returns (RegisterResponse);
     rpc Login (LoginRequest) returns (LoginResponse);
-    rpc Role (RoleRequest) returns (RoleResponse);
-    rpc VerifyToken (VerifyTokenRequest) returns (VerifyTokenResponse);
 }
 
 message RegisterRequest {
@@ -28,20 +26,4 @@ message LoginRequest {
 
 message LoginResponse {
     string token = 1;
-}
-
-message RoleRequest {
-    string token = 1;
-}
-
-message RoleResponse {
-    string role = 1;
-}
-
-message VerifyTokenRequest {
-    string token = 1;
-}
-
-message VerifyTokenResponse {
-    bool valid = 1;
 }

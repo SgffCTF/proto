@@ -19,14 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UserInfo_UserInfo_FullMethodName = "/user_info.UserInfo/UserInfo"
+	UserInfo_UserInfoToken_FullMethodName    = "/user_info.UserInfo/UserInfoToken"
+	UserInfo_UserInfoUsername_FullMethodName = "/user_info.UserInfo/UserInfoUsername"
 )
 
 // UserInfoClient is the client API for UserInfo service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserInfoClient interface {
-	UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error)
+	UserInfoToken(ctx context.Context, in *UserInfoTokenRequest, opts ...grpc.CallOption) (*UserInfoTokenResponse, error)
+	UserInfoUsername(ctx context.Context, in *UserInfoUsernameRequest, opts ...grpc.CallOption) (*UserInfoUsernameResponse, error)
 }
 
 type userInfoClient struct {
@@ -37,10 +39,20 @@ func NewUserInfoClient(cc grpc.ClientConnInterface) UserInfoClient {
 	return &userInfoClient{cc}
 }
 
-func (c *userInfoClient) UserInfo(ctx context.Context, in *UserInfoRequest, opts ...grpc.CallOption) (*UserInfoResponse, error) {
+func (c *userInfoClient) UserInfoToken(ctx context.Context, in *UserInfoTokenRequest, opts ...grpc.CallOption) (*UserInfoTokenResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UserInfoResponse)
-	err := c.cc.Invoke(ctx, UserInfo_UserInfo_FullMethodName, in, out, cOpts...)
+	out := new(UserInfoTokenResponse)
+	err := c.cc.Invoke(ctx, UserInfo_UserInfoToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userInfoClient) UserInfoUsername(ctx context.Context, in *UserInfoUsernameRequest, opts ...grpc.CallOption) (*UserInfoUsernameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserInfoUsernameResponse)
+	err := c.cc.Invoke(ctx, UserInfo_UserInfoUsername_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +63,8 @@ func (c *userInfoClient) UserInfo(ctx context.Context, in *UserInfoRequest, opts
 // All implementations must embed UnimplementedUserInfoServer
 // for forward compatibility.
 type UserInfoServer interface {
-	UserInfo(context.Context, *UserInfoRequest) (*UserInfoResponse, error)
+	UserInfoToken(context.Context, *UserInfoTokenRequest) (*UserInfoTokenResponse, error)
+	UserInfoUsername(context.Context, *UserInfoUsernameRequest) (*UserInfoUsernameResponse, error)
 	mustEmbedUnimplementedUserInfoServer()
 }
 
@@ -62,8 +75,11 @@ type UserInfoServer interface {
 // pointer dereference when methods are called.
 type UnimplementedUserInfoServer struct{}
 
-func (UnimplementedUserInfoServer) UserInfo(context.Context, *UserInfoRequest) (*UserInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UserInfo not implemented")
+func (UnimplementedUserInfoServer) UserInfoToken(context.Context, *UserInfoTokenRequest) (*UserInfoTokenResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserInfoToken not implemented")
+}
+func (UnimplementedUserInfoServer) UserInfoUsername(context.Context, *UserInfoUsernameRequest) (*UserInfoUsernameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserInfoUsername not implemented")
 }
 func (UnimplementedUserInfoServer) mustEmbedUnimplementedUserInfoServer() {}
 func (UnimplementedUserInfoServer) testEmbeddedByValue()                  {}
@@ -86,20 +102,38 @@ func RegisterUserInfoServer(s grpc.ServiceRegistrar, srv UserInfoServer) {
 	s.RegisterService(&UserInfo_ServiceDesc, srv)
 }
 
-func _UserInfo_UserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserInfoRequest)
+func _UserInfo_UserInfoToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserInfoTokenRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserInfoServer).UserInfo(ctx, in)
+		return srv.(UserInfoServer).UserInfoToken(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserInfo_UserInfo_FullMethodName,
+		FullMethod: UserInfo_UserInfoToken_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserInfoServer).UserInfo(ctx, req.(*UserInfoRequest))
+		return srv.(UserInfoServer).UserInfoToken(ctx, req.(*UserInfoTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserInfo_UserInfoUsername_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserInfoUsernameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserInfoServer).UserInfoUsername(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserInfo_UserInfoUsername_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserInfoServer).UserInfoUsername(ctx, req.(*UserInfoUsernameRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -112,8 +146,12 @@ var UserInfo_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*UserInfoServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "UserInfo",
-			Handler:    _UserInfo_UserInfo_Handler,
+			MethodName: "UserInfoToken",
+			Handler:    _UserInfo_UserInfoToken_Handler,
+		},
+		{
+			MethodName: "UserInfoUsername",
+			Handler:    _UserInfo_UserInfoUsername_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

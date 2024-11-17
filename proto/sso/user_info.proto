@@ -5,7 +5,8 @@ package user_info;
 option go_package = "ctf-service.sso.v1;ssov1";
 
 service UserInfo {
-    rpc UserInfo (UserInfoRequest) returns (UserInfoResponse);
+    rpc UserInfoToken (UserInfoTokenRequest) returns (UserInfoTokenResponse);
+    rpc UserInfoUsername (UserInfoUsernameRequest) returns (UserInfoUsernameResponse);
 }
 
 message User {
@@ -14,10 +15,18 @@ message User {
     string role = 3;
 }
 
-message UserInfoRequest {
+message UserInfoTokenRequest {
     string token = 1;
 }
 
-message UserInfoResponse {
+message UserInfoTokenResponse {
+    User user = 1;
+}
+
+message UserInfoUsernameRequest {
+    string username = 1;
+}
+
+message UserInfoUsernameResponse {
     User user = 1;
 }
